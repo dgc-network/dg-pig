@@ -21,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
 function shortcode_handler_function() {
     $output = 'here!';
+    $output = '<figure class="wp-block-table"><table><tbody>';
+    $output .= '<tr><td>作業日期<meta charset="utf-8"></td><td><input type="date"></td></tr>';
+    $output .= '<tr><td>類型</td><td><select><option>消毒</option><option>免疫</option><option>餵飼</option></select></td></tr><tr><td>時間</td><td><input type="time"></td></tr><tr><td>作業人員姓名</td><td><input type="text"></td></tr><tr><td>照片上傳</td><td><input type="text"></td></tr><tr><td>說明</td><td><input type="text"></td></tr><tr><td><input type="submit"></td><td></td></tr></tbody></table></figure>';
     return $output;
 }
 
