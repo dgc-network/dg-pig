@@ -37,6 +37,7 @@ function todo_items_callback() {
     } else {
         // Work with the error
     }
+    return $result;
     $output = 'name:'.$result['name'];
     return $output;
 }
