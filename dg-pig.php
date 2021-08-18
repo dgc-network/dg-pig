@@ -18,9 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-add_shortcode( 'shortcode_handler_function', 'shortcode_handler_function' );
+add_shortcode( 'shortcode_namme', 'shortcode_handler_function' );
 function shortcode_handler_function() {
-    echo 'here!';
+    $output = 'here!';
+    return $output;
 }
 
 
