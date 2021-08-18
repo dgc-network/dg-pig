@@ -18,9 +18,21 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-add_shortcode( 'shortcode_namme', 'shortcode_handler_function' );
+add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
 function shortcode_handler_function() {
     $output = 'here!';
+    return $output;
+}
+
+add_shortcode( 'TodoItems', 'todo_items_callback' );
+function todo_items_callback() {
+    $args     = array(
+        'method' => 'GET',
+    );
+    $response = wp_remote_request( 'https://localhost:5001/api/TodoItems', $args );
+    $body     = wp_remote_retrieve_body( $response );
+
+    $output = 'name:'.$body->name;
     return $output;
 }
 
