@@ -32,7 +32,7 @@ function todo_items_callback() {
     $response = wp_remote_request( 'https://localhost:5001/api/TodoItems', $args );
     $body     = wp_remote_retrieve_body( $response );
 
-    $output = 'name:'.$body->name;
+    $output = 'name:'.$body;
     return $output;
 }
 
