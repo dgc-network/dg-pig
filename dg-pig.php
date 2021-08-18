@@ -32,6 +32,7 @@ function todo_items_callback() {
     $response = wp_remote_request( 'https://localhost:5001/api/TodoItems/2', $args );
     $body     = wp_remote_retrieve_body( $response );
     $result   = json_decode( $body );
+    return print_r($result);
     //return json_decode($response);
 
     if ( is_array( $result ) && ! is_wp_error( $result ) ) {
