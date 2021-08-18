@@ -28,9 +28,9 @@ if ( ! defined( 'DG_PIG_PLUGIN_FILE' ) ) {
 /*
  * Include the main class.
  */
-if ( ! class_exists( 'dg_pig' ) ) {
+//if ( ! class_exists( 'dg_pig' ) ) {
     include_once dirname( __FILE__ ) . '/includes/class-dg-pig.php';
-}
+//}
 
 /*
 function dg_pig(){
