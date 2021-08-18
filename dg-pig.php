@@ -29,17 +29,17 @@ function todo_items_callback() {
     $args     = array(
         'method' => 'GET',
     );
-    $response = wp_remote_request( 'https://localhost:5001/api/TodoItems', $args );
+    $response = wp_remote_request( 'https://localhost:5001/api/TodoItems/2', $args );
     $body     = wp_remote_retrieve_body( $response );
     $result   = json_decode( $body );
-    return json_decode($response);
+    //return json_decode($response);
 
     if ( is_array( $result ) && ! is_wp_error( $result ) ) {
         // Work with the $result data
     } else {
         // Work with the error
     }
-    $output = 'name:'.$result['name'];
+    $output = 'name:'.$body['name'];
     return $output;
 }
 
