@@ -18,6 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+add_shortcode( 'shortcode_handler_function', 'shortcode_handler_function' );
+function shortcode_handler_function() {
+    echo 'here!';
+}
+
+
+
+
 /*
  * Define DG_PIG_PLUGIN_FILE.
  */

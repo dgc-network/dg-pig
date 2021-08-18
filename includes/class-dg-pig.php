@@ -11,10 +11,6 @@ if (!class_exists('dg_pig')) {
          */
         public function __construct() {
             add_shortcode('dg-pig', __CLASS__ . '::dg_pig_shortcode_callback');
-            //add_shortcode( 'shortcode_handler_function', array( $this, 'shortcode_handler_function' ));
-        }
-
-        public static function shortcode_handler_function() {
         }
 
         /**
