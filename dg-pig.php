@@ -32,12 +32,13 @@ function todo_items_callback() {
     $response = wp_remote_request( 'https://localhost:5001/api/TodoItems', $args );
     $body     = wp_remote_retrieve_body( $response );
     $result   = json_decode( $body );
+    return $response;
+
     if ( is_array( $result ) && ! is_wp_error( $result ) ) {
         // Work with the $result data
     } else {
         // Work with the error
     }
-    return $result;
     $output = 'name:'.$result['name'];
     return $output;
 }
