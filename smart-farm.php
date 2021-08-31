@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 include_once dirname( __FILE__ ) . '/php-OP_RETURN/OP_RETURN.php';
+$from = new Agent();
 
 add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
 function shortcode_handler_function() {
