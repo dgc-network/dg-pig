@@ -31,7 +31,7 @@ function shortcode_handler_function() {
 
     $output = '<figure class="wp-block-table"><table><tbody>';
     foreach ($unspent_inputs as $index => $unspent_input)
-    $output .= $unspent_inputs[$index]['address'];
+    $output .= '<tr><td>address</td><td>'.$unspent_inputs[$index]['address'].'</td></tr>';
     
     $output .= '<tr><td>作業日期<meta charset="utf-8"></td><td><input type="date"></td></tr>';
     $output .= '<tr><td>類型</td><td><select><option>消毒</option><option>免疫</option><option>餵飼</option></select></td></tr><tr><td>時間</td><td><input type="time"></td></tr><tr><td>作業人員姓名</td><td><input type="text"></td></tr><tr><td>照片上傳</td><td><input type="text"></td></tr><tr><td>說明</td><td><input type="text"></td></tr><tr><td><input type="submit"></td><td></td></tr></tbody></table></figure>';
