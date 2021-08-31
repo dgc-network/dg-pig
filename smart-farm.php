@@ -22,7 +22,21 @@ include_once dirname( __FILE__ ) . '/php-OP_RETURN/OP_RETURN.php';
 include_once dirname( __FILE__ ) . '/vendor/autoload.php';
 include_once dirname( __FILE__ ) . '/build/gen/GPBMetadata/PikeState.php';
 include_once dirname( __FILE__ ) . '/build/gen/Agent.php';
-$from = new Agent();
+include_once dirname( __FILE__ ) . '/build/gen/AgentList.php';
+
+add_shortcode( 'shortcode_agents', 'agents_callback' );
+function agents_callback() {
+    $AgentList = new AgentList();
+    $agents = $AgentList->getAgents();
+
+    $output = '<figure class="wp-block-table"><table><tbody>';
+    $output .= '<tr><td>ID</td><td>Name</td></tr>';
+    foreach ($agents as $index => $agent)
+        $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
+    $output .= '<tr><td> </td><td> </td></tr>';
+    $output .= '</tbody></table></figure>';
+    return $output;    
+}
 
 add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
 function shortcode_handler_function() {
@@ -38,7 +52,13 @@ function shortcode_handler_function() {
         $output .= '<tr><td>address</td><td>'.$unspent_inputs[$index]['address'].'</td></tr>';
     
     $output .= '<tr><td>作業日期<meta charset="utf-8"></td><td><input type="date"></td></tr>';
-    $output .= '<tr><td>類型</td><td><select><option>消毒</option><option>免疫</option><option>餵飼</option></select></td></tr><tr><td>時間</td><td><input type="time"></td></tr><tr><td>作業人員姓名</td><td><input type="text"></td></tr><tr><td>照片上傳</td><td><input type="text"></td></tr><tr><td>說明</td><td><input type="text"></td></tr><tr><td><input type="submit"></td><td></td></tr></tbody></table></figure>';
+    $output .= '<tr><td>類型</td><td><select><option>消毒</option><option>免疫</option><option>餵飼</option></select></td></tr>';
+    $output .= '<tr><td>時間</td><td><input type="time"></td></tr>';
+    $output .= '<tr><td>作業人員姓名</td><td><input type="text"></td></tr>';
+    $output .= '<tr><td>照片上傳</td><td><input type="text"></td></tr>';
+    $output .= '<tr><td>說明</td><td><input type="text"></td></tr>';
+    $output .= '<tr><td><input type="submit"></td><td></td></tr>';
+    $output .= '</tbody></table></figure>';
     return $output;
 }
 
