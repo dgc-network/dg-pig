@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 include_once dirname( __FILE__ ) . '/php-OP_RETURN/OP_RETURN.php';
 include_once dirname( __FILE__ ) . '/vendor/autoload.php';
+include_once dirname( __FILE__ ) . '/build/gen/GPMMetadata/PikeState.php';
 include_once dirname( __FILE__ ) . '/build/gen/Agent.php';
 $from = new Agent();
 
