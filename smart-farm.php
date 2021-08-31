@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name: dg-pig
- * Plugin URI: https://wordpress.org/plugins/dg-pig/
+ * Plugin Name: smart-farm
+ * Plugin URI: https://wordpress.org/plugins/smart-farm/
  * Description: The leading web api plugin for pig system by shortcode
  * Author: dgc.network
  * Author URI: https://dgc.network/
