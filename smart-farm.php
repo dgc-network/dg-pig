@@ -58,6 +58,7 @@ function agents_callback() {
         // Handle parsing error from invalid data.
         // ...
     }
+    $agents = $AgentList->getAgents();
   
     $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
     $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
@@ -81,10 +82,10 @@ function agents_callback() {
 */    
     $output = '<figure class="wp-block-table"><table><tbody>';
     $output .= '<tr><td>ID</td><td>Name</td></tr>';
-/*
+
     foreach ($agents as $index => $agent)
-        $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
-*/
+        $output .= '<tr><td>'.$index.'</td><td>'.$agents[$index]['PublicKey'].'</td></tr>';
+
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
     $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
 
