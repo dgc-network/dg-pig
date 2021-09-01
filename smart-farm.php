@@ -39,12 +39,13 @@ function agents_callback() {
 
     $CreateAgentAction = new CreateAgentAction();
     $CreateAgentAction->setOrgId('001');
+/*    
     $CreateAgentAction->setPublicKey('002');
     $CreateAgentAction->setActive(true);
     $CreateAgentAction->setRoles(['003']);
     $CreateAgentAction->setMetadata(['key1']);
     $metadata = $CreateAgentAction->serializeToString();
-
+*/
     $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
     $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
     $send_amount = 0.001;
@@ -72,7 +73,7 @@ function agents_callback() {
         $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
 */
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    $output .= '<tr><td>metadata</td><td>'.$metadata.'</td></tr>';
+    //$output .= '<tr><td>metadata</td><td>'.$metadata.'</td></tr>';
 
     $output .= '</tbody></table></figure>';
     return $output;    
