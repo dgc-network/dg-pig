@@ -81,10 +81,16 @@ function agents_callback() {
     }
 */    
     $output = '<figure class="wp-block-table"><table><tbody>';
-    $output .= '<tr><td>ID</td><td>Name</td></tr>';
+    $output .= '<tr><td>Name</td><td>PublicKey</td></tr>';
 
-    foreach ($agents as $index => $agent)
-        $output .= '<tr><td>'.$index.'</td><td>'.$agents[$index]->getPublicKey().'</td></tr>';
+    $metadata = '';
+    foreach ($agents as $index => $agent) {
+        $KeyValueEntries = $agents[$index]->getMetadata();
+        foreach ($KeyValueEntries as $i => $KeyValueEntry)
+            if ($KeyValueEntry->getKey()=='email') 
+                $metadata = $KeyValueEntry->getValue();
+        $output .= '<tr><td>'.$metadata.'</td><td>'.$agents[$index]->getPublicKey().'</td></tr>';
+    }
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
     $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
