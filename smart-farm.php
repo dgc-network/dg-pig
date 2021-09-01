@@ -31,10 +31,7 @@ include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 
 add_shortcode( 'shortcode_agents', 'agents_callback' );
 function agents_callback() {
-    $AgentList = new AgentList();
-    $agents = $AgentList->getAgents();
 
-    $Agent = new Agent();
     //$PikePayloadAction = new PikePayload_Action();
     //$PikePayload = new PikePayload();
     $KeyValueEntry = new KeyValueEntry();
@@ -43,17 +40,30 @@ function agents_callback() {
 
     $CreateAgentAction = new CreateAgentAction();
     $CreateAgentAction->setOrgId('001');
-    $CreateAgentAction->setPublicKey('002');
+    $CreateAgentAction->setPublicKey('DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD');
     $CreateAgentAction->setActive(true);
     $CreateAgentAction->setRoles(['003','004']);
     $CreateAgentAction->setMetadata([$KeyValueEntry]);
-    $data = $CreateAgentAction->serializeToString();
+    $send_data = $CreateAgentAction->serializeToString();
 
+    $AgentList = new AgentList();
+    $Agent = new Agent();
+    try {
+        $Agent->mergeFromString($send_data);
+        $agents = $AgentList->getAgents();
+        $agents[] = $Agent;
+        $AgentList->setAgents($agents);
+        $send_data = $AgentList->serializeToString();
+    } catch (Exception $e) {
+        // Handle parsing error from invalid data.
+        // ...
+    }
+  
     $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
     $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
     $send_amount = 0.001;
 /*
-	$result = OP_RETURN_send($send_address, $send_amount, $metadata);
+	$result = OP_RETURN_send($send_address, $send_amount, $send_data);
 	
 	if (isset($result['error']))
 		$result_output = 'Error: '.$result['error']."\n";
@@ -76,7 +86,7 @@ function agents_callback() {
         $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
 */
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    $output .= '<tr><td>data</td><td>'.$data.'</td></tr>';
+    $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
 
     $output .= '</tbody></table></figure>';
     return $output;    
