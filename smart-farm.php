@@ -23,6 +23,7 @@ include_once dirname( __FILE__ ) . '/vendor/autoload.php';
 include_once dirname( __FILE__ ) . '/build/gen/GPBMetadata/PikeState.php';
 include_once dirname( __FILE__ ) . '/build/gen/Agent.php';
 include_once dirname( __FILE__ ) . '/build/gen/AgentList.php';
+include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
 
 add_shortcode( 'shortcode_agents', 'agents_callback' );
 function agents_callback() {
