@@ -84,7 +84,7 @@ function agents_callback() {
     $output .= '<tr><td>ID</td><td>Name</td></tr>';
 
     foreach ($agents as $index => $agent)
-        //$output .= '<tr><td>'.$index.'</td><td>'.$agents[$index]['PublicKey'].'</td></tr>';
+        $output .= '<tr><td>'.$index.'</td><td>'.$agents[$index]->getPublicKey().'</td></tr>';
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
     $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
