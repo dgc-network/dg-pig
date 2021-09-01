@@ -34,10 +34,10 @@ function agents_callback() {
     $agents = $AgentList->getAgents();
 
     $Agent = new Agent();
-    $PikePayloadAction = new PikePayload_Action();
+    //$PikePayloadAction = new PikePayload_Action();
     //$PikePayload = new PikePayload();
 
-    //$CreateAgentAction = new CreateAgentAction($PikePayload);
+    $CreateAgentAction = new CreateAgentAction();
 
 /*    
     $CreateAgentAction = new CreateAgentAction();
