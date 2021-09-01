@@ -29,11 +29,40 @@ function agents_callback() {
     $AgentList = new AgentList();
     $agents = $AgentList->getAgents();
 
+    $Agent = new Agent();
+
+    $CreateAgentAction = new CreateAgentAction();
+    $CreateAgentAction->setOrgId('001');
+    $CreateAgentAction->setPublicKey('002');
+    $CreateAgentAction->setActive(true);
+    $CreateAgentAction->setRoles(['003']);
+    $CreateAgentAction->setMetadata(['key1']);
+    $metadata = $CreateAgentAction->serializeToString();
+    $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
+    $send_amount = 0.001;
+	$result = OP_RETURN_send($send_address, $send_amount, $metadata);
+	
+	if (isset($result['error']))
+		$result_output = 'Error: '.$result['error']."\n";
+	else
+        $result_output = 'TxID: '.$result['txid']."\nWait a few seconds then check on: http://coinsecrets.org/\n";
+
+/*
+    $data = $from->serializeToString();
+    try {
+      $to->mergeFromString($data);
+    } catch (Exception $e) {
+      // Handle parsing error from invalid data.
+      // ...
+    }
+*/    
     $output = '<figure class="wp-block-table"><table><tbody>';
     $output .= '<tr><td>ID</td><td>Name</td></tr>';
+/*
     foreach ($agents as $index => $agent)
         $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
-    $output .= '<tr><td> </td><td> </td></tr>';
+*/
+    $output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
     $output .= '</tbody></table></figure>';
     return $output;    
 }

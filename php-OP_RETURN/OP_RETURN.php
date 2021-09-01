@@ -43,8 +43,11 @@
 
 	}
 	
-	define('OP_RETURN_BTC_FEE', 0.0001); // BTC fee to pay per transaction
-	define('OP_RETURN_BTC_DUST', 0.00001); // omit BTC outputs smaller than this
+	//define('OP_RETURN_BTC_FEE', 0.0001); // BTC fee to pay per transaction
+	//define('OP_RETURN_BTC_DUST', 0.00001); // omit BTC outputs smaller than this
+
+	define('OP_RETURN_BTC_FEE', 0); // BTC fee to pay per transaction
+	define('OP_RETURN_BTC_DUST', 0); // omit BTC outputs smaller than this
 
 	define('OP_RETURN_MAX_BYTES', 80); // maximum bytes in an OP_RETURN (80 as of Bitcoin 0.11)
 	define('OP_RETURN_MAX_BLOCKS', 10); // maximum number of blocks to try when retrieving data
