@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 include_once dirname( __FILE__ ) . '/php-OP_RETURN/OP_RETURN.php';
 include_once dirname( __FILE__ ) . '/vendor/autoload.php';
+include_once dirname( __FILE__ ) . '/build/gen/GPBMetadata/PikePayload.php';
 include_once dirname( __FILE__ ) . '/build/gen/GPBMetadata/PikeState.php';
 include_once dirname( __FILE__ ) . '/build/gen/Agent.php';
 include_once dirname( __FILE__ ) . '/build/gen/AgentList.php';
@@ -34,9 +35,9 @@ function agents_callback() {
 
     $Agent = new Agent();
     $PikePayloadAction = new PikePayload_Action();
-    $PikePayload = new PikePayload();
+    //$PikePayload = new PikePayload();
 
-    $CreateAgentAction = new CreateAgentAction($PikePayload);
+    //$CreateAgentAction = new CreateAgentAction($PikePayload);
 
 /*    
     $CreateAgentAction = new CreateAgentAction();
