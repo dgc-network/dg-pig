@@ -23,6 +23,8 @@ include_once dirname( __FILE__ ) . '/vendor/autoload.php';
 include_once dirname( __FILE__ ) . '/build/gen/GPBMetadata/PikeState.php';
 include_once dirname( __FILE__ ) . '/build/gen/Agent.php';
 include_once dirname( __FILE__ ) . '/build/gen/AgentList.php';
+include_once dirname( __FILE__ ) . '/build/gen/PikePayload.php';
+include_once dirname( __FILE__ ) . '/build/gen/PikePayload/Action.php';
 include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
 
 add_shortcode( 'shortcode_agents', 'agents_callback' );
@@ -31,8 +33,11 @@ function agents_callback() {
     $agents = $AgentList->getAgents();
 
     $Agent = new Agent();
+    $PikePayloadAction = new PikePayload_Action();
+    $PikePayload = new PikePayload();
 
-    $CreateAgentAction = new CreateAgentAction();
+    $CreateAgentAction = new CreateAgentAction($PikePayload);
+
 /*    
     $CreateAgentAction = new CreateAgentAction();
     $CreateAgentAction->setOrgId('001');
