@@ -31,7 +31,7 @@ function agents_callback() {
     $agents = $AgentList->getAgents();
 
     $Agent = new Agent();
-
+/*
     $CreateAgentAction = new CreateAgentAction();
     $CreateAgentAction->setOrgId('001');
     $CreateAgentAction->setPublicKey('002');
@@ -39,7 +39,7 @@ function agents_callback() {
     $CreateAgentAction->setRoles(['003']);
     $CreateAgentAction->setMetadata(['key1']);
     $metadata = $CreateAgentAction->serializeToString();
-
+*/
     $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
     $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
     $send_amount = 0.001;
