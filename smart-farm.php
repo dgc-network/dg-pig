@@ -31,7 +31,9 @@ function agents_callback() {
     $agents = $AgentList->getAgents();
 
     $Agent = new Agent();
-/*
+
+    $CreateAgentAction = new CreateAgentAction();
+/*    
     $CreateAgentAction = new CreateAgentAction();
     $CreateAgentAction->setOrgId('001');
     $CreateAgentAction->setPublicKey('002');
