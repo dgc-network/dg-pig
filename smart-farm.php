@@ -41,13 +41,14 @@ function agents_callback() {
     $metadata = $CreateAgentAction->serializeToString();
     $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
     $send_amount = 0.001;
+/*
 	$result = OP_RETURN_send($send_address, $send_amount, $metadata);
 	
 	if (isset($result['error']))
 		$result_output = 'Error: '.$result['error']."\n";
 	else
         $result_output = 'TxID: '.$result['txid']."\nWait a few seconds then check on: http://coinsecrets.org/\n";
-
+*/
 /*
     $data = $from->serializeToString();
     try {
@@ -63,7 +64,8 @@ function agents_callback() {
     foreach ($agents as $index => $agent)
         $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
 */
-    $output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
+    //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
+
     $output .= '</tbody></table></figure>';
     return $output;    
 }
