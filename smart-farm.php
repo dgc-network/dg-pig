@@ -27,6 +27,7 @@ include_once dirname( __FILE__ ) . '/build/gen/AgentList.php';
 include_once dirname( __FILE__ ) . '/build/gen/PikePayload.php';
 include_once dirname( __FILE__ ) . '/build/gen/PikePayload/Action.php';
 include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
+include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 
 add_shortcode( 'shortcode_agents', 'agents_callback' );
 function agents_callback() {
@@ -36,14 +37,17 @@ function agents_callback() {
     $Agent = new Agent();
     //$PikePayloadAction = new PikePayload_Action();
     //$PikePayload = new PikePayload();
+    $KeyValueEntry = new KeyValueEntry();
+    $KeyValueEntry->setKey('email');
+    $KeyValueEntry->setValue('rove.k.chen@gmail.com');
 
     $CreateAgentAction = new CreateAgentAction();
     $CreateAgentAction->setOrgId('001');
     $CreateAgentAction->setPublicKey('002');
     $CreateAgentAction->setActive(true);
-    $CreateAgentAction->setRoles(['003']);
-    //$CreateAgentAction->setMetadata(['key1']);
-    $metadata = $CreateAgentAction->serializeToString();
+    $CreateAgentAction->setRoles(['003','004']);
+    $CreateAgentAction->setMetadata([$KeyValueEntry]);
+    $data = $CreateAgentAction->serializeToString();
 
     $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
     $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
@@ -72,7 +76,7 @@ function agents_callback() {
         $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
 */
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    $output .= '<tr><td>metadata</td><td>'.$metadata.'</td></tr>';
+    $output .= '<tr><td>data</td><td>'.$data.'</td></tr>';
 
     $output .= '</tbody></table></figure>';
     return $output;    
