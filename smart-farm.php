@@ -74,7 +74,7 @@ function agents_callback() {
         $output .= '<tr><td>address</td><td>'.$agents[$index]['address'].'</td></tr>';
 */
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    //$output .= '<tr><td>metadata</td><td>'.$metadata.'</td></tr>';
+    $output .= '<tr><td>metadata</td><td>'.$metadata.'</td></tr>';
 
     $output .= '</tbody></table></figure>';
     return $output;    
