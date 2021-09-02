@@ -98,8 +98,11 @@ function agents_callback() {
     $output .= '</tbody></table></figure>';
 
     $output .= '<div class="wp-block-button">';
-    //$output .= '<a class="wp-block-button__link" href="https://foot-2beaa9.ingress-erytho.easywp.com/agent/">Create New</a>';
     $output .= '<a class="wp-block-button__link" href="/agent/">Create New</a>';
+    $output .= '</div>';
+
+    $output .= '<div class="wp-block-button">';
+    $output .= '<a class="wp-block-button__link" href="/agent/">Cancel</a>';
     $output .= '</div>';
 
     return $output;    
@@ -173,6 +176,15 @@ function agent_callback( $atts = [], $content = null, $tag = '' ) {
     $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
 */
     $output .= '</tbody></table></figure>';
+
+    $output .= '<div class="wp-block-button">';
+    $output .= '<a class="wp-block-button__link" href="/agents/">Ok</a>';
+    $output .= '</div>';
+
+    $output .= '<div class="wp-block-button">';
+    $output .= '<a class="wp-block-button__link" href="/agents/">Cancel</a>';
+    $output .= '</div>';
+
     return $output;    
 }
 
