@@ -206,7 +206,7 @@ function shortcode_handler_function( $atts = [], $content = null, $tag = '' ) {
         ), $atts, $tag
     );
  
-    $content='[list_agents]';
+    //$content='[list_agents]';
     //do_shortcode( $content );
 
     // start box
@@ -218,7 +218,7 @@ function shortcode_handler_function( $atts = [], $content = null, $tag = '' ) {
     // enclosing tags
     if ( ! is_null( $content ) ) {
         // secure output by executing the_content filter hook on $content
-        $o .= apply_filters( 'the_content', $content );
+        //$o .= apply_filters( 'the_content', $content );
  
         // run shortcode parser recursively
         $o .= do_shortcode( $content );
