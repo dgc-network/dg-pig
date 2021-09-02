@@ -206,11 +206,13 @@ function shortcode_handler_function( $atts = [], $content = null, $tag = '' ) {
         ), $atts, $tag
     );
  
+    $content='list_agents';
+
     // start box
     $o = '<div class="wporg-box">';
  
     // title
-    $o .= '<h2>' . esc_html__( $wporg_atts['title'], 'wporg' ) . '</h2>';
+    //$o .= '<h2>' . esc_html__( $wporg_atts['title'], 'wporg' ) . '</h2>';
  
     // enclosing tags
     if ( ! is_null( $content ) ) {
