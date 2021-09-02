@@ -109,11 +109,11 @@ function agents_callback() {
     $output .= '</div>';
     $output .= '</div>';
 
-    if(isset($_GET['agent_callback'])){
-        agent_callback();
-    }
-
     return $output;    
+}
+
+if(isset($_GET['agent_callback'])){
+    agent_callback();
 }
 
 add_shortcode( 'edit_agent', 'agent_callback' );
