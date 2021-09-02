@@ -206,8 +206,8 @@ function shortcode_handler_function( $atts = [], $content = null, $tag = '' ) {
         ), $atts, $tag
     );
  
-    $content='list_agents';
-    do_shortcode( $content );
+    $content='[list_agents]';
+    //do_shortcode( $content );
 
     // start box
     $o = '<div class="wporg-box">';
