@@ -102,9 +102,16 @@ function agents_callback() {
     $output .= '<a class="wp-block-button__link" href="/agent/">Create New</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
+    $output .= '<a class="wp-block-button__link" href="?agent_callback=true">Agent</a>';
+    $output .= '</div>';
+    $output .= '<div class="wp-block-button">';
     $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
     $output .= '</div>';
     $output .= '</div>';
+
+    if(isset($_GET['agent_callback'])){
+        agent_callback();
+    }
 
     return $output;    
 }
@@ -206,9 +213,6 @@ function shortcode_handler_function( $atts = [], $content = null, $tag = '' ) {
         ), $atts, $tag
     );
  
-    //$content='[list_agents]';
-    //do_shortcode( $content );
-
     // start box
     $o = '<div class="wporg-box">';
  
