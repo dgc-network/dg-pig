@@ -102,7 +102,7 @@ function agents_callback() {
     $output .= '<a class="wp-block-button__link" href="/agent/">Create New</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
-    $output .= '<a class="wp-block-button__link" href="/agent/">Cancel</a>';
+    $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
     $output .= '</div>';
     $output .= '</div>';
 
@@ -161,17 +161,21 @@ function agent_callback( $atts = [], $content = null, $tag = '' ) {
     }
 */    
     $output = '<figure class="wp-block-table"><table><tbody>';
-    $output .= '<tr><td>PublicKey</td><td><input type="text"></td></tr>';
-    $output .= '<tr><td>Name</td><td><input type="text"></td></tr>';
+    foreach ($atts as $key => $value)
+        $output .= '<tr><td>'.$key.'</td><td><input type="text" value="'.$value.'"></td></tr>';
 /*
-    $metadata = '';
-    foreach ($agents as $index => $agent) {
-        $KeyValueEntries = $agents[$index]->getMetadata();
+    foreach ($atts as $index => $att) {
+        $KeyValueEntries = $atts[$index]->getMetadata();
         foreach ($KeyValueEntries as $i => $KeyValueEntry)
             if ($KeyValueEntry->getKey()=='email') 
                 $metadata = $KeyValueEntry->getValue();
         $output .= '<tr><td>'.$metadata.'</td><td>'.$agents[$index]->getPublicKey().'</td></tr>';
     }
+    $output .= '<tr><td>PublicKey</td><td><input type="text"></td></tr>';
+    $output .= '<tr><td>Name</td><td><input type="text"></td></tr>';
+*/    
+/*
+    $metadata = '';
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
     $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
@@ -191,27 +195,37 @@ function agent_callback( $atts = [], $content = null, $tag = '' ) {
 }
 
 add_shortcode( 'shortcode_name', 'shortcode_handler_function' );
-function shortcode_handler_function() {
-    $output = 'here!';
-
-    $testnet=false;
-    $unspent_inputs=OP_RETURN_bitcoin_cmd('listunspent', $testnet, 0);
-    if (!is_array($unspent_inputs))
-        return array('error' => 'Could not retrieve list of unspent inputs');
-    
-    $output = '<figure class="wp-block-table"><table><tbody>';
-    foreach ($unspent_inputs as $index => $unspent_input)
-        $output .= '<tr><td>address</td><td>'.$unspent_inputs[$index]['address'].'</td></tr>';
-    
-    $output .= '<tr><td>作業日期<meta charset="utf-8"></td><td><input type="date"></td></tr>';
-    $output .= '<tr><td>類型</td><td><select><option>消毒</option><option>免疫</option><option>餵飼</option></select></td></tr>';
-    $output .= '<tr><td>時間</td><td><input type="time"></td></tr>';
-    $output .= '<tr><td>作業人員姓名</td><td><input type="text"></td></tr>';
-    $output .= '<tr><td>照片上傳</td><td><input type="text"></td></tr>';
-    $output .= '<tr><td>說明</td><td><input type="text"></td></tr>';
-    $output .= '<tr><td><input type="submit"></td><td></td></tr>';
-    $output .= '</tbody></table></figure>';
-    return $output;
+function shortcode_handler_function( $atts = [], $content = null, $tag = '' ) {
+    // normalize attribute keys, lowercase
+    $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+ 
+    // override default attributes with user attributes
+    $wporg_atts = shortcode_atts(
+        array(
+            'title' => 'WordPress.org',
+        ), $atts, $tag
+    );
+ 
+    // start box
+    $o = '<div class="wporg-box">';
+ 
+    // title
+    $o .= '<h2>' . esc_html__( $wporg_atts['title'], 'wporg' ) . '</h2>';
+ 
+    // enclosing tags
+    if ( ! is_null( $content ) ) {
+        // secure output by executing the_content filter hook on $content
+        $o .= apply_filters( 'the_content', $content );
+ 
+        // run shortcode parser recursively
+        $o .= do_shortcode( $content );
+    }
+ 
+    // end box
+    $o .= '</div>';
+ 
+    // return output
+    return $o;
 }
 
 add_shortcode( 'TodoItems', 'todo_items_callback' );
