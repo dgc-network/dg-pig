@@ -29,7 +29,7 @@ include_once dirname( __FILE__ ) . '/build/gen/PikePayload/Action.php';
 include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
 include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 
-add_shortcode( 'shortcode_agents', 'agents_callback' );
+add_shortcode( 'list_agents', 'agents_callback' );
 function agents_callback() {
 
     //$PikePayloadAction = new PikePayload_Action();
@@ -93,8 +93,84 @@ function agents_callback() {
     }
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
+    //$output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
 
+    $output .= '</tbody></table></figure>';
+
+    $output .= '<div class="wp-block-button">';
+    $output .= '<a class="wp-block-button__link" href="https://foot-2beaa9.ingress-erytho.easywp.com/agent/">Create New</a>';
+    $output .= '</div>';
+
+    return $output;    
+}
+
+add_shortcode( 'edit_agent', 'agent_callback' );
+function agent_callback( $atts = [], $content = null, $tag = '' ) {
+
+    //$PikePayloadAction = new PikePayload_Action();
+    //$PikePayload = new PikePayload();
+    $KeyValueEntry = new KeyValueEntry();
+    $KeyValueEntry->setKey('email');
+    $KeyValueEntry->setValue('rove.k.chen@gmail.com');
+
+    $CreateAgentAction = new CreateAgentAction();
+    $CreateAgentAction->setOrgId('001');
+    $CreateAgentAction->setPublicKey('DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD');
+    $CreateAgentAction->setActive(true);
+    $CreateAgentAction->setRoles(['003','004']);
+    $CreateAgentAction->setMetadata([$KeyValueEntry]);
+    $send_data = $CreateAgentAction->serializeToString();
+
+    $AgentList = new AgentList();
+    $Agent = new Agent();
+    try {
+        $Agent->mergeFromString($send_data);
+        $agents = $AgentList->getAgents();
+        $agents[] = $Agent;
+        $AgentList->setAgents($agents);
+        $send_data = $AgentList->serializeToString();
+    } catch (Exception $e) {
+        // Handle parsing error from invalid data.
+        // ...
+    }
+    $agents = $AgentList->getAgents();
+  
+    $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
+    $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
+    $send_amount = 0.001;
+/*
+	$result = OP_RETURN_send($send_address, $send_amount, $send_data);
+	
+	if (isset($result['error']))
+		$result_output = 'Error: '.$result['error']."\n";
+	else
+        $result_output = 'TxID: '.$result['txid']."\nWait a few seconds then check on: http://coinsecrets.org/\n";
+*/
+/*
+    $data = $from->serializeToString();
+    try {
+      $to->mergeFromString($data);
+    } catch (Exception $e) {
+      // Handle parsing error from invalid data.
+      // ...
+    }
+*/    
+    $output = '<figure class="wp-block-table"><table><tbody>';
+    $output .= '<tr><td>PublicKey</td><td><input type="text"></td></tr>';
+    $output .= '<tr><td>Name</td><td><input type="text"></td></tr>';
+/*
+    $metadata = '';
+    foreach ($agents as $index => $agent) {
+        $KeyValueEntries = $agents[$index]->getMetadata();
+        foreach ($KeyValueEntries as $i => $KeyValueEntry)
+            if ($KeyValueEntry->getKey()=='email') 
+                $metadata = $KeyValueEntry->getValue();
+        $output .= '<tr><td>'.$metadata.'</td><td>'.$agents[$index]->getPublicKey().'</td></tr>';
+    }
+
+    //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
+    $output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
+*/
     $output .= '</tbody></table></figure>';
     return $output;    
 }
