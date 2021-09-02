@@ -179,6 +179,7 @@ function agent_callback( $atts = [], $content = null, $tag = '' ) {
 
     $output .= '<div class="wp-block-button">';
     $output .= '<a class="wp-block-button__link" href="/agents/">Ok</a>';
+    $output .= '<a class="wp-block-button__link" href="/agents/">Cancel</a>';
     $output .= '</div>';
 
     $output .= '<div class="wp-block-button">';
