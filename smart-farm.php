@@ -38,10 +38,10 @@ function agent_shortcode_callback() {
 
     if ($_GET['_mode']=='edit_agent'){
 
-        $output = '<figure class="wp-block-table"><table><tbody>';
+        $output = '<form method="get"><figure class="wp-block-table"><table><tbody>';
         $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$_GET['_PublicKey'].'"></td></tr>';
         $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$_GET['_LoginName'].'"></td></tr>';
-        $output .= '</tbody></table></figure>';
+        $output .= '</tbody></table></figure></form>';
 
         $output .= '<div class="wp-block-buttons">';
         //$output .= '<div class="wp-block-button">';
