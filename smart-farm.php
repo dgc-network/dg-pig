@@ -38,7 +38,7 @@ function agent_shortcode_callback() {
 
     if ($_GET['_mode']=='edit_agent'){
 
-        $output = '<form method="get"><figure class="wp-block-table"><table><tbody>';
+        $output = '<form method="post"><figure class="wp-block-table"><table><tbody>';
         $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$_GET['_PublicKey'].'"></td></tr>';
         $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$_GET['_LoginName'].'"></td></tr>';
         $output .= '</tbody></table></figure></form>';
@@ -66,12 +66,12 @@ function agent_shortcode_callback() {
 
         $KeyValueEntry = new KeyValueEntry();
         $KeyValueEntry->setKey('email');
-        $KeyValueEntry->setValue($_GET['_LoginName']);
+        $KeyValueEntry->setValue($_POST['_LoginName']);
         $KeyValueEntries[]=$KeyValueEntry;
 
         $CreateAgentAction = new CreateAgentAction();
         $CreateAgentAction->setOrgId($_GET['_OrgId']);
-        $CreateAgentAction->setPublicKey($_GET['_PublicKey']);
+        $CreateAgentAction->setPublicKey($_POST['_PublicKey']);
         $CreateAgentAction->setActive($_GET['_Active']);
         $CreateAgentAction->setRoles($Roles);
         $CreateAgentAction->setMetadata($KeyValueEntries);
