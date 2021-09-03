@@ -38,8 +38,8 @@ function agents_callback() {
         agent_callback();
 
         $output = '<figure class="wp-block-table"><table><tbody>';
-        $output .= '<tr><td>'.'PublicKey'.'</td><td><input type="text" value="'.$_GET['_PublicKey'].'"></td></tr>';
-        $output .= '<tr><td>'.'Name'.'</td><td><input type="text" value="'.$_GET['_name'].'"></td></tr>';
+        $output .= '<tr><td>'.'PublicKey'.'</td><td style="width: 100%"><input style="width: 100%" type="text" value="'.$_GET['_PublicKey'].'"></td></tr>';
+        $output .= '<tr><td>'.'Name'.'</td><td><input type="text" value="'.$_GET['_Name'].'"></td></tr>';
         $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
