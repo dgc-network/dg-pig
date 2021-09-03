@@ -38,9 +38,8 @@ function agents_callback() {
         agent_callback();
 
         $output = '<figure class="wp-block-table"><table><tbody>';
-        $output .= '<tr><td>'.'PublicKey'.'</td><td><input type="text" value="'.$_GET['_mode'].'"></td></tr>';
-        $output .= '<tr><td>'.'e-Mail'.'</td><td><input type="text" value="'.$_GET['_mode'].'"></td></tr>';
-        $output .= '<tr><td>'.'Name'.'</td><td><input type="text" value="'.$_GET['_mode'].'"></td></tr>';
+        $output .= '<tr><td>'.'PublicKey'.'</td><td><input type="text" value="'.$_GET['_PublicKey'].'"></td></tr>';
+        $output .= '<tr><td>'.'Name'.'</td><td><input type="text" value="'.$_GET['_name'].'"></td></tr>';
         $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
@@ -109,13 +108,14 @@ function agents_callback() {
 
     $metadata = '';
     foreach ($agents as $index => $agent) {
+        $PublicKey = $agents[$index]->getPublicKey();
         $KeyValueEntries = $agents[$index]->getMetadata();
         foreach ($KeyValueEntries as $i => $KeyValueEntry)
             if ($KeyValueEntry->getKey()=='email') 
-                $metadata = $KeyValueEntry->getValue();
-            $output .= '<tr><td>'.$metadata.'</td><td>'.$agents[$index]->getPublicKey().'</td>';
-            $output .= '<td>'.'<a class="wp-block-button__link" href="?_mode=agent_edit">Update</a>'.'</td>';
-            $output .= '<td>'.'<a class="wp-block-button__link" href="?_mode=agent_edit">Delete</a>'.'</td>';
+                $Name = $KeyValueEntry->getValue();
+            $output .= '<tr><td>'.$Name.'</td><td>'.$PublicKey.'</td>';
+            $output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_Name='.$Name.'">Update</a></td>';
+            $output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
             $output .= '</tr>';
     }
 
