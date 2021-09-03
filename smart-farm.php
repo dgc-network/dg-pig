@@ -105,7 +105,7 @@ function agents_callback() {
     }
 */    
     $output = '<figure class="wp-block-table"><table><tbody>';
-    $output .= '<tr><td>Name</td><td>PublicKey</td></tr>';
+    $output .= '<tr><td>Name</td><td>PublicKey</td><td></td><td></td></tr>';
 
     $metadata = '';
     foreach ($agents as $index => $agent) {
@@ -113,20 +113,20 @@ function agents_callback() {
         foreach ($KeyValueEntries as $i => $KeyValueEntry)
             if ($KeyValueEntry->getKey()=='email') 
                 $metadata = $KeyValueEntry->getValue();
-        $output .= '<tr><td>'.$metadata.'</td><td>'.$agents[$index]->getPublicKey().'</td></tr>';
+            $output .= '<tr><td>'.$metadata.'</td><td>'.$agents[$index]->getPublicKey().'</td>';
+            $output .= '<td>'.'<a class="wp-block-button__link" href="?_mode=agent_edit">Update</a>'.'</td>';
+            $output .= '<td>'.'<a class="wp-block-button__link" href="?_mode=agent_edit">Delete</a>'.'</td>';
+            $output .= '</tr>';
     }
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    $output .= '<tr><td>mode</td><td>'.$_GET['_mode'].'</td></tr>';
+    //$output .= '<tr><td>mode</td><td>'.$_GET['_mode'].'</td></tr>';
 
     $output .= '</tbody></table></figure>';
 
     $output .= '<div class="wp-block-buttons">';
     $output .= '<div class="wp-block-button">';
-    $output .= '<a class="wp-block-button__link" href="/agent/">Create New</a>';
-    $output .= '</div>';
-    $output .= '<div class="wp-block-button">';
-    $output .= '<a class="wp-block-button__link" href="?_mode=agent_edit">Agent</a>';
+    $output .= '<a class="wp-block-button__link" href="?_mode=agent_edit">Create New</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
     $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
