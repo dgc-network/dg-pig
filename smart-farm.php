@@ -32,6 +32,10 @@ include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 add_shortcode( 'list_agents', 'agents_callback' );
 function agents_callback() {
 
+    if(isset($_GET['agent_callback'])){
+        agent_callback();
+    }
+    
     //$PikePayloadAction = new PikePayload_Action();
     //$PikePayload = new PikePayload();
     $KeyValueEntry = new KeyValueEntry();
@@ -112,9 +116,6 @@ function agents_callback() {
     return $output;    
 }
 
-if(isset($_GET['agent_callback'])){
-    agent_callback();
-}
 
 add_shortcode( 'edit_agent', 'agent_callback' );
 function agent_callback( $atts = [], $content = null, $tag = '' ) {
