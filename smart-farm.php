@@ -29,7 +29,7 @@ include_once dirname( __FILE__ ) . '/build/gen/PikePayload/Action.php';
 include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
 include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 
-add_shortcode( 'list_agents', 'agents_callback' );
+add_shortcode( 'agents_list', 'agents_callback' );
 function agents_callback() {
 
     if(isset($_GET['agent_callback'])){
@@ -97,7 +97,7 @@ function agents_callback() {
     }
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    //$output .= '<tr><td>send_data</td><td>'.$send_data.'</td></tr>';
+    $output .= '<tr><td>agent_callback</td><td>'.$_GET['agent_callback'].'</td></tr>';
 
     $output .= '</tbody></table></figure>';
 
@@ -117,7 +117,7 @@ function agents_callback() {
 }
 
 
-add_shortcode( 'edit_agent', 'agent_callback' );
+add_shortcode( 'agent_edit', 'agent_callback' );
 function agent_callback( $atts = [], $content = null, $tag = '' ) {
 
     //$PikePayloadAction = new PikePayload_Action();
