@@ -32,7 +32,7 @@ include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 add_shortcode( 'agents_list', 'agents_callback' );
 function agents_callback() {
 
-    if ($_GET['mode']=='agent_callback'){
+    if ($_GET['_mode']=='agent_callback'){
         agent_callback();
     }
     
