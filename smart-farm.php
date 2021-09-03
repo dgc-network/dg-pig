@@ -32,16 +32,24 @@ include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 add_shortcode( 'agents_list', 'agents_callback' );
 function agents_callback() {
 
-    if ($_GET['_mode']=='agent_callback'){
+    if ($_GET['_mode']=='agent_edit'){
 
         do_shortcode('[agent_edit]');
+        agent_callback();
 
-        $output = '<div class="wp-block-button">';
-        $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
+        $output .= '</tbody></table></figure>';
+
+        $output .= '<div class="wp-block-buttons">';
+        $output .= '<div class="wp-block-button">';
+        $output .= '<a class="wp-block-button__link" href="?_mode=agent_list">Ok</a>';
         $output .= '</div>';
+        $output .= '<div class="wp-block-button">';
+        $output .= '<a class="wp-block-button__link" href="?_mode=agent_list"">Cancel</a>';
+        $output .= '</div>';
+        $output .= '</div>';
+    
         return $output;    
 
-        agent_callback();
     }
     
     //$PikePayloadAction = new PikePayload_Action();
@@ -114,7 +122,7 @@ function agents_callback() {
     $output .= '<a class="wp-block-button__link" href="/agent/">Create New</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
-    $output .= '<a class="wp-block-button__link" href="?_mode=agent_callback">Agent</a>';
+    $output .= '<a class="wp-block-button__link" href="?_mode=agent_edit">Agent</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
     $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
