@@ -27,15 +27,13 @@ include_once dirname( __FILE__ ) . '/build/gen/AgentList.php';
 include_once dirname( __FILE__ ) . '/build/gen/PikePayload.php';
 include_once dirname( __FILE__ ) . '/build/gen/PikePayload/Action.php';
 include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
+include_once dirname( __FILE__ ) . '/build/gen/UpdateAgentAction.php';
 include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 
-add_shortcode( 'agents_list', 'agents_callback' );
-function agents_callback() {
+add_shortcode( 'agent_shortcode', 'agent_shortcode_callback' );
+function agent_shortcode_callback() {
 
-    if ($_GET['_mode']=='agent_edit'){
-
-        //do_shortcode('[agent_edit]');
-        //agent_callback();
+    if ($_GET['_mode']=='edit_agent'){
 
         $output = '<figure class="wp-block-table"><table><tbody>';
         $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$_GET['_PublicKey'].'"></td></tr>';
@@ -58,10 +56,46 @@ function agents_callback() {
 
     }
     
-    if ($_GET['_mode']=='agent_update'){
-        return $_GET['_mode'];
+    if ($_GET['_mode']=='create_agent'){
+
+        $Roles = array();
+        $KeyValueEntries = array();
+
+        $KeyValueEntry = new KeyValueEntry();
+        $KeyValueEntry->setKey('email');
+        $KeyValueEntry->setValue($_GET['_Name']);
+        $KeyValueEntries[]=$KeyValueEntry;
+
+        $CreateAgentAction = new CreateAgentAction();
+        $CreateAgentAction->setOrgId($_GET['_OrgId']);
+        $CreateAgentAction->setPublicKey($_GET['_PublicKey']);
+        $CreateAgentAction->setActive($_GET['_Active']);
+        $CreateAgentAction->setRoles($Roles);
+        $CreateAgentAction->setMetadata($KeyValueEntries);
+        $CreateAgent_data = $CreateAgentAction->serializeToString();
+    
     }
 
+    if ($_GET['_mode']=='update_agent'){
+
+        $Roles = array();
+        $KeyValueEntries = array();
+
+        $KeyValueEntry = new KeyValueEntry();
+        $KeyValueEntry->setKey('email');
+        $KeyValueEntry->setValue($_GET['_Name']);
+        $KeyValueEntries[]=$KeyValueEntry;
+
+        $UpdateAgentAction = new UpdateAgentAction();
+        $UpdateAgentAction->setOrgId($_GET['_OrgId']);
+        $UpdateAgentAction->setPublicKey($_GET['_PublicKey']);
+        $UpdateAgentAction->setActive($_GET['_Active']);
+        $UpdateAgentAction->setRoles($Roles);
+        $UpdateAgentAction->setMetadata($KeyValueEntries);
+        $UpdateAgent_data = $UpdateAgentAction->serializeToString();
+    
+    }
+/*
     //$PikePayloadAction = new PikePayload_Action();
     //$PikePayload = new PikePayload();
     $KeyValueEntry = new KeyValueEntry();
@@ -75,7 +109,7 @@ function agents_callback() {
     $CreateAgentAction->setRoles(['003','004']);
     $CreateAgentAction->setMetadata([$KeyValueEntry]);
     $send_data = $CreateAgentAction->serializeToString();
-
+*/
     $AgentList = new AgentList();
     $Agent = new Agent();
     try {
@@ -126,14 +160,11 @@ function agents_callback() {
             $output .= '</tr>';
     }
 
-    //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    //$output .= '<tr><td>mode</td><td>'.$_GET['_mode'].'</td></tr>';
-
     $output .= '</tbody></table></figure>';
 
     $output .= '<div class="wp-block-buttons">';
     $output .= '<div class="wp-block-button">';
-    $output .= '<a class="wp-block-button__link" href="?_mode=agent_edit">Create New</a>';
+    $output .= '<a class="wp-block-button__link" href="?_mode=edit_agent&_submit=create">Create New</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
     $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
