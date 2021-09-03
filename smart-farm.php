@@ -40,7 +40,7 @@ function agent_shortcode_callback() {
 
         $output = '<figure class="wp-block-table"><table><tbody>';
         $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$_GET['_PublicKey'].'"></td></tr>';
-        $output .= '<tr><td>'.'Name:'.'</td><td><input style="width: 100%" type="text" name="_Name" value="'.$_GET['_Name'].'"></td></tr>';
+        $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$_GET['_LoginName'].'"></td></tr>';
         $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
@@ -66,7 +66,7 @@ function agent_shortcode_callback() {
 
         $KeyValueEntry = new KeyValueEntry();
         $KeyValueEntry->setKey('email');
-        $KeyValueEntry->setValue($_GET['_Name']);
+        $KeyValueEntry->setValue($_GET['_LoginName']);
         $KeyValueEntries[]=$KeyValueEntry;
 
         $CreateAgentAction = new CreateAgentAction();
@@ -75,7 +75,33 @@ function agent_shortcode_callback() {
         $CreateAgentAction->setActive($_GET['_Active']);
         $CreateAgentAction->setRoles($Roles);
         $CreateAgentAction->setMetadata($KeyValueEntries);
+
         $send_data = $CreateAgentAction->serializeToString();
+        $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
+        $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
+        $send_amount = 0.001;
+    
+        try {
+            $agents = $AgentList->getAgents();
+            $Agent->mergeFromString($send_data);
+            foreach ( $agents as $agent ){
+
+            }
+            //$agents[] = $Agent;
+            $AgentList->setAgents($agents);
+            //$send_data = $AgentList->serializeToString();
+        } catch (Exception $e) {
+            // Handle parsing error from invalid data.
+            // ...
+        }
+/*
+	    $result = OP_RETURN_send($send_address, $send_amount, $send_data);
+	
+	    if (isset($result['error']))
+		    $result_output = 'Error: '.$result['error']."\n";
+	    else
+            $result_output = 'TxID: '.$result['txid']."\nWait a few seconds then check on: http://coinsecrets.org/\n";
+*/
     
     }
 
@@ -102,50 +128,26 @@ function agent_shortcode_callback() {
         $send_amount = 0.001;
     
         try {
-            $Agent->mergeFromString($send_data);
             $agents = $AgentList->getAgents();
+            $Agent->mergeFromString($send_data);
             $agents[] = $Agent;
             $AgentList->setAgents($agents);
-            $send_data = $AgentList->serializeToString();
+            //$send_data = $AgentList->serializeToString();
         } catch (Exception $e) {
             // Handle parsing error from invalid data.
             // ...
         }
+/*
+	    $result = OP_RETURN_send($send_address, $send_amount, $send_data);
+	
+	    if (isset($result['error']))
+		    $result_output = 'Error: '.$result['error']."\n";
+	    else
+            $result_output = 'TxID: '.$result['txid']."\nWait a few seconds then check on: http://coinsecrets.org/\n";
+*/
         
     }
-/*
-    //$PikePayloadAction = new PikePayload_Action();
-    //$PikePayload = new PikePayload();
-    $KeyValueEntry = new KeyValueEntry();
-    $KeyValueEntry->setKey('email');
-    $KeyValueEntry->setValue('rove.k.chen@gmail.com');
 
-    $CreateAgentAction = new CreateAgentAction();
-    $CreateAgentAction->setOrgId('001');
-    $CreateAgentAction->setPublicKey('DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD');
-    $CreateAgentAction->setActive(true);
-    $CreateAgentAction->setRoles(['003','004']);
-    $CreateAgentAction->setMetadata([$KeyValueEntry]);
-    $send_data = $CreateAgentAction->serializeToString();
-*/
-  
-/*
-	$result = OP_RETURN_send($send_address, $send_amount, $send_data);
-	
-	if (isset($result['error']))
-		$result_output = 'Error: '.$result['error']."\n";
-	else
-        $result_output = 'TxID: '.$result['txid']."\nWait a few seconds then check on: http://coinsecrets.org/\n";
-*/
-/*
-    $data = $from->serializeToString();
-    try {
-      $to->mergeFromString($data);
-    } catch (Exception $e) {
-      // Handle parsing error from invalid data.
-      // ...
-    }
-*/
     $agents = $AgentList->getAgents();
 
     $output = '<figure class="wp-block-table"><table><tbody>';
