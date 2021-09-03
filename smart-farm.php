@@ -33,6 +33,11 @@ add_shortcode( 'agents_list', 'agents_callback' );
 function agents_callback() {
 
     if ($_GET['_mode']=='agent_callback'){
+        $output = '<div class="wp-block-button">';
+        $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
+        $output .= '</div>';
+        return $output;    
+
         agent_callback();
     }
     
