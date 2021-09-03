@@ -58,7 +58,7 @@ function agents_callback() {
 
     }
     
-    if ($_GET['_mode']=='agent_edit'){
+    if ($_GET['_mode']=='agent_update'){
         return $_GET['_mode'];
     }
 
