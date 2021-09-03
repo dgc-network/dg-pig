@@ -47,18 +47,18 @@ function agent_shortcode_callback() {
 
         $output .= '<div class="wp-block-buttons">';
         $output .= '<div class="wp-block-button">';
-        $output .= '<input class="wp-block-button__link" type="submit" value="OK" name="'.$_GET['_submit'].'_agent">';
+        $output .= '<input class="wp-block-button__link" type="submit" value="OK" name="create_agent">';
         $output .= '</div>';
-        $output .= '<div class="wp-block-button">';
-        $output .= '<a class="wp-block-button__link" href="?_mode='.$_GET['_submit'].'_agent">'.$_GET['_submit'].'</a>';
-        $output .= '</div>';
+        //$output .= '<div class="wp-block-button">';
+        //$output .= '<a class="wp-block-button__link" href="?_mode='.$_GET['_submit'].'_agent">'.$_GET['_submit'].'</a>';
+        //$output .= '</div>';
         $output .= '<div class="wp-block-button">';
         $output .= '<a class="wp-block-button__link" href="?_mode=agents_list"">Cancel</a>';
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</form>';
     
-        return $output;    
+        return $output;
 
     }
     
