@@ -145,20 +145,21 @@ function agent_shortcode_callback() {
       // Handle parsing error from invalid data.
       // ...
     }
-*/    
+*/
     $agents = $AgentList->getAgents();
+
     $output = '<figure class="wp-block-table"><table><tbody>';
-    $output .= '<tr><td>Name</td><td>PublicKey</td><td></td><td></td></tr>';
+    $output .= '<tr><td>LoginName</td><td>PublicKey</td><td></td><td></td></tr>';
 
     $metadata = '';
     foreach ($agents as $index => $agent) {
         $PublicKey = $agents[$index]->getPublicKey();
         $KeyValueEntries = $agents[$index]->getMetadata();
-        foreach ($KeyValueEntries as $i => $KeyValueEntry)
+        foreach ($KeyValueEntries as $KeyValueEntry)
             if ($KeyValueEntry->getKey()=='email') 
-                $Name = $KeyValueEntry->getValue();
-            $output .= '<tr><td>'.$Name.'</td><td>'.$PublicKey.'</td>';
-            $output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_Name='.$Name.'&_submit=update">Update</a></td>';
+                $LoginName = $KeyValueEntry->getValue();
+            $output .= '<tr><td>'.$LoginName.'</td><td>'.$PublicKey.'</td>';
+            $output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_LoginName='.$LoginName.'&_submit=update">Update</a></td>';
             $output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
             $output .= '</tr>';
     }
