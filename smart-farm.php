@@ -33,6 +33,9 @@ include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 add_shortcode( 'agent_shortcode', 'agent_shortcode_callback' );
 function agent_shortcode_callback() {
 
+    $AgentList = new AgentList();
+    $Agent = new Agent();
+
     if ($_GET['_mode']=='edit_agent'){
 
         $output = '<figure class="wp-block-table"><table><tbody>';
@@ -72,7 +75,7 @@ function agent_shortcode_callback() {
         $CreateAgentAction->setActive($_GET['_Active']);
         $CreateAgentAction->setRoles($Roles);
         $CreateAgentAction->setMetadata($KeyValueEntries);
-        $CreateAgent_data = $CreateAgentAction->serializeToString();
+        $send_data = $CreateAgentAction->serializeToString();
     
     }
 
@@ -92,8 +95,23 @@ function agent_shortcode_callback() {
         $UpdateAgentAction->setActive($_GET['_Active']);
         $UpdateAgentAction->setRoles($Roles);
         $UpdateAgentAction->setMetadata($KeyValueEntries);
-        $UpdateAgent_data = $UpdateAgentAction->serializeToString();
+
+        $send_data = $UpdateAgentAction->serializeToString();
+        $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
+        $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
+        $send_amount = 0.001;
     
+        try {
+            $Agent->mergeFromString($send_data);
+            $agents = $AgentList->getAgents();
+            $agents[] = $Agent;
+            $AgentList->setAgents($agents);
+            $send_data = $AgentList->serializeToString();
+        } catch (Exception $e) {
+            // Handle parsing error from invalid data.
+            // ...
+        }
+        
     }
 /*
     //$PikePayloadAction = new PikePayload_Action();
@@ -110,23 +128,7 @@ function agent_shortcode_callback() {
     $CreateAgentAction->setMetadata([$KeyValueEntry]);
     $send_data = $CreateAgentAction->serializeToString();
 */
-    $AgentList = new AgentList();
-    $Agent = new Agent();
-    try {
-        $Agent->mergeFromString($send_data);
-        $agents = $AgentList->getAgents();
-        $agents[] = $Agent;
-        $AgentList->setAgents($agents);
-        $send_data = $AgentList->serializeToString();
-    } catch (Exception $e) {
-        // Handle parsing error from invalid data.
-        // ...
-    }
-    $agents = $AgentList->getAgents();
   
-    $send_address = 'DFcP5QFjbYtfgzWoqGedhxecCrRe41G3RD';
-    $private_key = 'L44NzghbN6UD737kG6ukfdCq6BXyyTY2W15UkNhHnBff6acYWtsZ';
-    $send_amount = 0.001;
 /*
 	$result = OP_RETURN_send($send_address, $send_amount, $send_data);
 	
@@ -144,6 +146,7 @@ function agent_shortcode_callback() {
       // ...
     }
 */    
+    $agents = $AgentList->getAgents();
     $output = '<figure class="wp-block-table"><table><tbody>';
     $output .= '<tr><td>Name</td><td>PublicKey</td><td></td><td></td></tr>';
 
