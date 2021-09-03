@@ -84,10 +84,7 @@ function agent_shortcode_callback() {
         try {
             $agents = $AgentList->getAgents();
             $Agent->mergeFromString($send_data);
-            foreach ( $agents as $agent ){
-
-            }
-            //$agents[] = $Agent;
+            $agents[] = $Agent;
             $AgentList->setAgents($agents);
             //$send_data = $AgentList->serializeToString();
         } catch (Exception $e) {
@@ -130,7 +127,10 @@ function agent_shortcode_callback() {
         try {
             $agents = $AgentList->getAgents();
             $Agent->mergeFromString($send_data);
-            $agents[] = $Agent;
+            foreach ( $agents as $agent ){
+
+            }
+            //$agents[] = $Agent;
             $AgentList->setAgents($agents);
             //$send_data = $AgentList->serializeToString();
         } catch (Exception $e) {
