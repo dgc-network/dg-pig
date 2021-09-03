@@ -41,25 +41,26 @@ function agent_shortcode_callback() {
         $output = '<form method="post"><figure class="wp-block-table"><table><tbody>';
         $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$_GET['_PublicKey'].'"></td></tr>';
         $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$_GET['_LoginName'].'"></td></tr>';
-        $output .= '</tbody></table></figure></form>';
+        $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
-        //$output .= '<div class="wp-block-button">';
-        //$output .= '<form><input class="wp-block-button__link" type="submit" value="OK"></form>';
-        //$output .= '</div>';
+        $output .= '<div class="wp-block-button">';
+        $output .= '<input class="wp-block-button__link" type="submit" value="OK" name="'.$_GET['_submit'].'_agent">';
+        $output .= '</div>';
         $output .= '<div class="wp-block-button">';
         $output .= '<a class="wp-block-button__link" href="?_mode='.$_GET['_submit'].'_agent">'.$_GET['_submit'].'</a>';
         $output .= '</div>';
         $output .= '<div class="wp-block-button">';
         $output .= '<a class="wp-block-button__link" href="?_mode=agents_list"">Cancel</a>';
         $output .= '</div>';
-        $output .= '</div>';
+        $output .= '</div></form>';
     
         return $output;    
 
     }
     
-    if ($_GET['_mode']=='create_agent'){
+    if( isset($_POST['create_agent']) ) {
+    //if ($_GET['_mode']=='create_agent'){
 
         $Roles = array();
         $KeyValueEntries = array();
