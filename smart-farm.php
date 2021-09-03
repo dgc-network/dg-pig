@@ -32,7 +32,7 @@ include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
 add_shortcode( 'agents_list', 'agents_callback' );
 function agents_callback() {
 
-    if(isset($_GET['agent_callback'])){
+    if ($_GET['mode']=='agent_callback'){
         agent_callback();
     }
     
@@ -97,7 +97,7 @@ function agents_callback() {
     }
 
     //$output .= '<tr><td> </td><td>'.$result_output.'</td></tr>';
-    $output .= '<tr><td>agent_callback</td><td>'.$_GET['agent_callback'].'</td></tr>';
+    $output .= '<tr><td>mode</td><td>'.$_GET['_mode'].'</td></tr>';
 
     $output .= '</tbody></table></figure>';
 
@@ -106,7 +106,7 @@ function agents_callback() {
     $output .= '<a class="wp-block-button__link" href="/agent/">Create New</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
-    $output .= '<a class="wp-block-button__link" href="?agent_callback=true">Agent</a>';
+    $output .= '<a class="wp-block-button__link" href="?_mode=agent_callback">Agent</a>';
     $output .= '</div>';
     $output .= '<div class="wp-block-button">';
     $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
