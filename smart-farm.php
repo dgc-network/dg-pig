@@ -37,14 +37,18 @@ function agents_callback() {
         do_shortcode('[agent_edit]');
         agent_callback();
 
+        $output = '<figure class="wp-block-table"><table><tbody>';
+        $output .= '<tr><td>'.'PublicKey'.'</td><td><input type="text" value="'.$_GET['_mode'].'"></td></tr>';
+        $output .= '<tr><td>'.'e-Mail'.'</td><td><input type="text" value="'.$_GET['_mode'].'"></td></tr>';
+        $output .= '<tr><td>'.'Name'.'</td><td><input type="text" value="'.$_GET['_mode'].'"></td></tr>';
         $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
         $output .= '<div class="wp-block-button">';
-        $output .= '<a class="wp-block-button__link" href="?_mode=agent_list">Ok</a>';
+        $output .= '<a class="wp-block-button__link" href="?_mode=agents_list">Ok</a>';
         $output .= '</div>';
         $output .= '<div class="wp-block-button">';
-        $output .= '<a class="wp-block-button__link" href="?_mode=agent_list"">Cancel</a>';
+        $output .= '<a class="wp-block-button__link" href="?_mode=agents_list"">Cancel</a>';
         $output .= '</div>';
         $output .= '</div>';
     
