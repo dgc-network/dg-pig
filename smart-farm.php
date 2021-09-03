@@ -172,6 +172,7 @@ function agent_shortcode_callback() {
 
     $output .= '</tbody></table></figure>';
 
+    $output .= '<form method="post">';
     $output .= '<div class="wp-block-buttons">';
     $output .= '<div class="wp-block-button">';
     $output .= '<input class="wp-block-button__link" type="submit" value="Create New" name="edit_agent">';
@@ -183,6 +184,7 @@ function agent_shortcode_callback() {
     $output .= '<a class="wp-block-button__link" href="/">Cancel</a>';
     $output .= '</div>';
     $output .= '</div>';
+    $output .= '</form>';
 
     return $output;    
 }
