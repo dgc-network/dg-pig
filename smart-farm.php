@@ -29,12 +29,12 @@ include_once dirname( __FILE__ ) . '/build/gen/PikePayload/Action.php';
 include_once dirname( __FILE__ ) . '/build/gen/CreateAgentAction.php';
 include_once dirname( __FILE__ ) . '/build/gen/UpdateAgentAction.php';
 include_once dirname( __FILE__ ) . '/build/gen/KeyValueEntry.php';
+$AgentList = new AgentList();
+$Agent = new Agent();
 
 add_shortcode( 'agent_shortcode', 'agent_shortcode_callback' );
 function agent_shortcode_callback() {
 
-    $AgentList = new AgentList();
-    $Agent = new Agent();
 
     if( isset($_POST['edit_agent']) ) {
     //if ($_GET['_mode']=='edit_agent'){
@@ -49,12 +49,15 @@ function agent_shortcode_callback() {
         $output .= '<div class="wp-block-button">';
         $output .= '<input class="wp-block-button__link" type="submit" value="OK" name="create_agent">';
         $output .= '</div>';
+        $output .= '<div class="wp-block-button">';
+        $output .= '<input class="wp-block-button__link" type="submit" value="Cancel"';
+        $output .= '</div>';
         //$output .= '<div class="wp-block-button">';
         //$output .= '<a class="wp-block-button__link" href="?_mode='.$_GET['_submit'].'_agent">'.$_GET['_submit'].'</a>';
         //$output .= '</div>';
-        $output .= '<div class="wp-block-button">';
-        $output .= '<a class="wp-block-button__link" href="?_mode=agents_list"">Cancel</a>';
-        $output .= '</div>';
+        //$output .= '<div class="wp-block-button">';
+        //$output .= '<a class="wp-block-button__link" href="?_mode=agents_list"">Cancel</a>';
+        //$output .= '</div>';
         $output .= '</div>';
         $output .= '</form>';
     
