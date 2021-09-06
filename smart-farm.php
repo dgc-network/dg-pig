@@ -169,7 +169,8 @@ function agent_shortcode_callback() {
                 $LoginName = $KeyValueEntry->getValue();
             $output .= '<tr><td>'.$LoginName.'</td><td>'.$PublicKey.'</td>';
             $output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_LoginName='.$LoginName.'&_submit=update">Update</a></td>';
-            $output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
+            //$output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
+            $output .= '<td><input class="wp-block-button__link" type="submit" value="Delete" name="edit_agent"></td>';
             $output .= '</tr>';
     }
 
