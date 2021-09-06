@@ -157,7 +157,8 @@ function agent_shortcode_callback() {
 
     $agents = $AgentList->getAgents();
 
-    $output = '<figure class="wp-block-table"><table><tbody>';
+    $output  = '<form method="post">';
+    $output .= '<figure class="wp-block-table"><table><tbody>';
     $output .= '<tr><td>LoginName</td><td>PublicKey</td><td></td><td></td></tr>';
 
     $metadata = '';
@@ -167,16 +168,16 @@ function agent_shortcode_callback() {
         foreach ($KeyValueEntries as $KeyValueEntry)
             if ($KeyValueEntry->getKey()=='email') 
                 $LoginName = $KeyValueEntry->getValue();
-            $output .= '<tr><td>'.$LoginName.'</td><td>'.$PublicKey.'</td>';
-            $output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_LoginName='.$LoginName.'&_submit=update">Update</a></td>';
-            //$output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
-            $output .= '<td><input class="wp-block-button__link" type="submit" value="Delete" name="edit_agent"></td>';
-            $output .= '</tr>';
+        $output .= '<tr><td>'.$LoginName.'</td><td>'.$PublicKey.'</td>';
+        //$output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_LoginName='.$LoginName.'&_submit=update">Update</a></td>';
+        //$output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
+        $output .= '<td><input class="wp-block-button__link" type="submit" value="Update" name="edit_agent"></td>';
+        $output .= '<td><input class="wp-block-button__link" type="submit" value="Delete" name="edit_agent"></td>';
+        $output .= '</tr>';
     }
 
     $output .= '</tbody></table></figure>';
 
-    $output .= '<form method="post">';
     $output .= '<div class="wp-block-buttons">';
     $output .= '<div class="wp-block-button">';
     $output .= '<input class="wp-block-button__link" type="submit" value="Create New" name="edit_agent">';
