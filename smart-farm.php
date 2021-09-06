@@ -53,7 +53,8 @@ function agent_shortcode_callback() {
         $output  = '<form method="post">';
         $output .= '<figure class="wp-block-table"><table><tbody>';
         $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$PublicKey.'"></td></tr>';
-        $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$LoginName.'"></td></tr>';
+        //$output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$LoginName.'"></td></tr>';
+        $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$_POST['_item'].'"></td></tr>';
         $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
