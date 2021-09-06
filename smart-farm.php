@@ -36,13 +36,24 @@ function agent_shortcode_callback() {
     $AgentList = new AgentList();
     $Agent = new Agent();
     
-    if( isset($_POST['edit_agent']) || ($_GET['_mode']=='edit_agent') ) {
+    if( isset($_POST['edit_agent']) ) {
     //if ($_GET['_mode']=='edit_agent'){
+
+        $agents = $AgentList->getAgents();
+        foreach ($agents as $index => $agent) {
+            if ($_POST['_item']==$index) {
+                $PublicKey = $agents[$index]->getPublicKey();
+                $KeyValueEntries = $agents[$index]->getMetadata();
+                foreach ($KeyValueEntries as $KeyValueEntry)
+                if ($KeyValueEntry->getKey()=='email') 
+                    $LoginName = $KeyValueEntry->getValue();
+            }
+        }
 
         $output  = '<form method="post">';
         $output .= '<figure class="wp-block-table"><table><tbody>';
-        $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$_GET['_PublicKey'].'"></td></tr>';
-        $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$_GET['_LoginName'].'"></td></tr>';
+        $output .= '<tr><td>'.'PublicKey:'.'</td><td style="width: 100%"><input style="width: 100%" type="text" name="_PublicKey" value="'.$PublicKey.'"></td></tr>';
+        $output .= '<tr><td>'.'LoginName:'.'</td><td><input style="width: 100%" type="text" name="_LoginName" value="'.$LoginName.'"></td></tr>';
         $output .= '</tbody></table></figure>';
 
         $output .= '<div class="wp-block-buttons">';
@@ -155,13 +166,13 @@ function agent_shortcode_callback() {
         
     }
 
-    $agents = $AgentList->getAgents();
 
     $output  = '<form method="post">';
     $output .= '<figure class="wp-block-table"><table><tbody>';
     $output .= '<tr><td>LoginName</td><td>PublicKey</td><td></td><td></td></tr>';
 
-    $metadata = '';
+    //$metadata = '';
+    $agents = $AgentList->getAgents();
     foreach ($agents as $index => $agent) {
         $PublicKey = $agents[$index]->getPublicKey();
         $KeyValueEntries = $agents[$index]->getMetadata();
@@ -171,6 +182,9 @@ function agent_shortcode_callback() {
         $output .= '<tr><td>'.$LoginName.'</td><td>'.$PublicKey.'</td>';
         //$output .= '<td><a href="?_mode=agent_edit&_PublicKey='.$PublicKey.'&_LoginName='.$LoginName.'&_submit=update">Update</a></td>';
         //$output .= '<td>'.'<a href="?_mode=agent_edit">Delete</a>'.'</td>';
+        $output .= '<input type="hidden" value="'.$index.'" name="_item">';
+        //$output .= '<input type="hidden" value="'.$LoginName.'" name="_LoginName_'.$index.'">';
+        //$output .= '<input type="hidden" value="'.$PublicKey.'" name="_PublicKey_'.$index.'">';
         $output .= '<td><input class="wp-block-button__link" type="submit" value="Update" name="edit_agent"></td>';
         $output .= '<td><input class="wp-block-button__link" type="submit" value="Delete" name="edit_agent"></td>';
         $output .= '</tr>';
